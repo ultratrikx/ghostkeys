@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Source Serif 4", Georgia, Cambria, "Times New Roman", serif;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 168, 179, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 168, 179, 0.5);
+}
+
+/* Prevent text selection during drag */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Widget drag region */
+[data-tauri-drag-region] {
+  cursor: move;
+}
+
+/* Tooltip styles */
+.tooltip {
+  @apply invisible opacity-0 absolute z-50 px-2 py-1 text-xs rounded
+         bg-ghost-700 text-ghost-200 border border-ghost-600
+         transition-all duration-200 whitespace-nowrap
+         -top-8 left-0;
+}
+
+.tooltip-container:hover .tooltip {
+  @apply visible opacity-100;
+}
+
+/* Custom range slider styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-track {
+  height: 6px;
+  border-radius: 3px;
+  background: #2e2e33;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #8b9a82;
+  margin-top: -4px;
+  transition: background 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: #9aab90;
+}
+
+input[type="range"]:disabled::-webkit-slider-thumb {
+  background: #52525b;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: #2e2e33;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #8b9a82;
+  border: none;
+  transition: background 0.15s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  background: #9aab90;
+}
+
+/* Focus styles */
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 2px rgba(139, 154, 130, 0.3);
+}
+
+/* Button hover transition */
+button {
+  transition: all 0.15s ease;
+}
+
+/* Smooth color transitions */
+.transition-colors {
+  transition-property: color, background-color, border-color;
+  transition-timing-function: ease;
+  transition-duration: 150ms;
+}

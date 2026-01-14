@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "ghostkeys",
+  "version": "0.1.0",
+  "identifier": "com.ghostkeys.app",
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev",
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "ghostkeys",
+        "label": "main",
+        "width": 400,
+        "height": 700,
+        "minWidth": 350,
+        "minHeight": 500,
+        "resizable": true,
+        "center": true,
+        "decorations": true,
+        "transparent": false,
+        "visible": true
+      },
+      {
+        "title": "ghostkeys widget",
+        "label": "widget",
+        "url": "/widget.html",
+        "width": 200,
+        "height": 60,
+        "resizable": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "visible": true,
+        "x": 20,
+        "y": 20
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "webviewInstallMode": {
+        "type": "embedBootstrapper"
+      }
+    }
+  },
+  "plugins": {}
+}
