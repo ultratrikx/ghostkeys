@@ -1,4 +1,5 @@
-import { FileDropzone } from "./components/FileDropzone";
+import { ContentInput } from "./components/ContentInput";
+import { TextEditor } from "./components/TextEditor";
 import { TypingControls } from "./components/TypingControls";
 import { SettingsPanel } from "./components/SettingsPanel";
 import { StatusBar } from "./components/StatusBar";
@@ -8,7 +9,7 @@ import { useConfig } from "./hooks/useConfig";
 import "./styles/globals.css";
 
 function App() {
-  const { state, countdown, loadFile, start, stop, pause, resume } =
+  const { state, countdown, loadContent, updateContent, start, stop, pause, resume } =
     useTypingState();
   const { config, updateConfig, resetConfig } = useConfig();
 
@@ -27,14 +28,26 @@ function App() {
       </header>
 
       <div className="space-y-6">
-        {/* File Drop Zone */}
+        {/* Content Input (File Drop or Paste) */}
         <section>
-          <FileDropzone
-            onFileLoad={loadFile}
+          <ContentInput
+            onContentLoad={loadContent}
             fileName={state.fileName}
             disabled={isTypingOrCountdown}
           />
         </section>
+
+        {/* Text Editor/Preview */}
+        {state.content && (
+          <section>
+            <TextEditor
+              content={state.content}
+              fileName={state.fileName}
+              onContentChange={updateContent}
+              disabled={isTypingOrCountdown}
+            />
+          </section>
+        )}
 
         {/* Status */}
         <section>

@@ -64,13 +64,13 @@ export function useTypingState() {
     };
   }, []);
 
-  const loadFile = useCallback(async (content: string, fileName: string) => {
+  const loadContent = useCallback(async (content: string, fileName: string | null) => {
     try {
-      await commands.setFileContent(content, fileName);
+      await commands.setFileContent(content, fileName || "Pasted Text");
       setState((prev) => ({
         ...prev,
         status: "ready",
-        fileName,
+        fileName: fileName || "Pasted Text",
         content,
         totalChars: content.length,
         currentChar: 0,
@@ -85,6 +85,26 @@ export function useTypingState() {
       }));
     }
   }, []);
+
+  const updateContent = useCallback(async (content: string) => {
+    try {
+      const currentFileName = state.fileName || "Pasted Text";
+      await commands.setFileContent(content, currentFileName);
+      setState((prev) => ({
+        ...prev,
+        content,
+        totalChars: content.length,
+        currentChar: 0,
+        percent: 0,
+      }));
+    } catch (error) {
+      setState((prev) => ({
+        ...prev,
+        status: "error",
+        errorMessage: String(error),
+      }));
+    }
+  }, [state.fileName]);
 
   const start = useCallback(async () => {
     try {
@@ -135,7 +155,8 @@ export function useTypingState() {
   return {
     state,
     countdown,
-    loadFile,
+    loadContent,
+    updateContent,
     start,
     stop,
     pause,
